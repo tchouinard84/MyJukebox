@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Win32;
+using MyJukebox.ViewModel;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyJukebox
 {
@@ -19,49 +12,67 @@ namespace MyJukebox
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string InitialDirectory = @"C:\Users\tchouina\Music";
+        private const string FileFilter = "MP3 Files (*.mp3)|*.mp3";
+
+        private readonly MusicFileViewModel viewModel;
+
+        private ObservableCollection<User> users = new ObservableCollection<User>();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            users.Add(new User { Name = "John Doe" });
+            users.Add(new User { Name = "Jane Doe" });
+
+            lbUsers.ItemsSource = users;
+
+            //DataContext = this;
+            //viewModel = FindResource("ViewModel") as MusicFileViewModel;
         }
 
-        private void OnCanExecuteOpen(object sender, CanExecuteRoutedEventArgs e)
+        private void OnClickOpen(object sender, RoutedEventArgs e)
         {
-            e.CanExecute = true;
+            var openDialog = new OpenFileDialog
+            {
+                Title = "Open a File",
+                InitialDirectory = InitialDirectory,
+                Filter = FileFilter
+            };
+
+            if (openDialog.ShowDialog() == false) { return; }
+
+            //var file = openDialog.FileName;
+            //viewModel.Open(file);
         }
 
-        private void OnCanExecutePlay(object sender, CanExecuteRoutedEventArgs e)
+        private void BtnAddUser_OnClick(object sender, RoutedEventArgs e)
         {
-            //e.CanExecute = 
+            users.Add(new User { Name = "New user" });
         }
 
-        private void OnCanExecutePause(object sender, CanExecuteRoutedEventArgs e)
+        private void BtnChangeUser_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (lbUsers.SelectedItem == null) { return; }
+            (lbUsers.SelectedItem as User).Name = "Random Name";
         }
 
-        private void OnCanExecuteStop(object sender, CanExecuteRoutedEventArgs e)
+        private void BtnDeleteUser_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (lbUsers.SelectedItem == null) { return; }
+            users.Remove(lbUsers.SelectedItem as User);
         }
+    }
 
-        private void OnExecutedOpen(object sender, ExecutedRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+    public class User : INotifyPropertyChanged
+    {
+        public string Name { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnExecutedPlay(object sender, ExecutedRoutedEventArgs e)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            throw new NotImplementedException();
-        }
-
-        private void OnExecutedPause(object sender, ExecutedRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnExecutedStop(object sender, ExecutedRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
