@@ -33,8 +33,8 @@ namespace MyJukebox
 
             if (openDialog.ShowDialog() == false) { return; }
 
-            //var file = openDialog.FileName;
-            //viewModel.Open(file);
+            var file = openDialog.FileName;
+            viewModel.Open(file);
         }
 
     }

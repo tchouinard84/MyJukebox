@@ -18,12 +18,26 @@
             <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
                 <Button Click="OnClickOpen">Open File</Button>
             </StackPanel>
-            <StackPanel>
-                <WrapPanel>
-                    <TextBlock Text="Title:  "/>
-                    <TextBox Text="{Binding }"></TextBox>
-                </WrapPanel>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" HorizontalAlignment="Right">
+                    <TextBlock Text="Title:  " Height="22"/>
+                    <TextBlock Text="Artist:  " Height="22"/>
+                    <TextBlock Text="Album:  " Height="22"/>
+                    <TextBlock Text="Year:  " Height="22"/>
+                    <TextBlock Text="Genre:  " Height="22"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                    <TextBox Text="{Binding Title}" Width="250"/>
+                    <TextBox Text="{Binding Artist}" Width="250"/>
+                    <TextBox Text="{Binding Album}" Width="250"/>
+                    <TextBox Text="{Binding Year}" Width="250"/>
+                    <TextBox Text="{Binding Genre}" Width="250"/>
+                </StackPanel>
+            </Grid>
         </DockPanel>
     </Grid>
 </Window>
