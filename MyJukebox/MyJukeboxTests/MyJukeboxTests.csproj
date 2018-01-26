@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Model\MusicFileTests.cs" />
     <Compile Include="TestUtil.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyJukebox\MyJukebox.csproj">
-      <Project>{3f912479-25bc-40c4-8918-37093e27bb4f}</Project>
+      <Project>{a274a732-963c-4896-8617-eaa8a05e926b}</Project>
       <Name>MyJukebox</Name>
     </ProjectReference>
   </ItemGroup>

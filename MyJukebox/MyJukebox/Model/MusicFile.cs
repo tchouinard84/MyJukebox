@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Id3;
+using System;
 using System.Collections.Generic;
-using Id3;
 
 namespace MyJukebox.Model
 {
@@ -25,7 +25,8 @@ namespace MyJukebox.Model
                 Title = tag.Title.Value,
                 Artist = tag.Artists.Value,
                 Album = tag.Album.Value,
-                Year = DetermineYear(tag)
+                Year = DetermineYear(tag),
+                Genre = tag.Genre.Value
             };
         }
 

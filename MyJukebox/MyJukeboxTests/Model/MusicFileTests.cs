@@ -12,7 +12,7 @@ namespace MyJukeboxTests.Model
         private const string Title = "title";
         private const string Artist = "artist";
         private const string Album = "album";
-        private const string YearString = "1/1/1991 12:00:00 AM";
+        private const string Genre = "genre";
 
         private const int Year = 1991;
 
@@ -46,7 +46,8 @@ namespace MyJukeboxTests.Model
                 Title = Title,
                 Artist = Artist,
                 Album = Album,
-                Year = year
+                Year = year,
+                Genre = Genre
             };
         }
 
@@ -62,7 +63,8 @@ namespace MyJukeboxTests.Model
                 Title = { Value = Title },
                 Artists = { Value = Artist },
                 Album = { Value = Album },
-                Year = { AsDateTime = year }
+                Year = { AsDateTime = year },
+                Genre = { Value = Genre}
             };
         }
     }
