@@ -67,12 +67,24 @@ namespace MyJukebox
 
     public class User : INotifyPropertyChanged
     {
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name == value) { return; }
+                _name = value;
+                NotifyPropertyChanged("Name");
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void NotifyPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged == null) { return; }
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
