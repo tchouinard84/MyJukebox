@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Id3;
+﻿using Id3;
 using MyJukebox.Model;
+using System.ComponentModel;
 
 namespace MyJukebox.ViewModel
 {
-    public class MusicFileViewModel
+    public class MusicFileViewModel : INotifyPropertyChanged
     {
+        public string Title { get; set; }
         public void Open(string file)
         {
             using (var mp3 = new Mp3File(file))
@@ -18,6 +15,13 @@ namespace MyJukebox.ViewModel
 
                 var mp3File = MusicFile.ValueOf(tag);
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
