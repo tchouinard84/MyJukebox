@@ -41,11 +41,14 @@ void Main()
 			mp3Files.Add(mp3File);
 		}
 	}
+	mp3Files.Dump();
+	
 	var asJson = JsonConvert.SerializeObject(mp3Files);
 	asJson.Dump();
 	
 	var fromJson = JsonConvert.DeserializeObject<List<Mp3>>(asJson);
 	fromJson.Dump();
+	
 	
 }
 
